@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+targetNamespace="http://www.omg.org/spec/BPMN/20100524/MODEL">
+
+    <bpmn:process id="productionPlanningExecution" name="Production Planning and Execution">
+        <bpmn:startEvent id="startEvent"/>
+        <bpmn:task id="changeMaterialRecord" name="Change Material Master Record"/>
+        <bpmn:task id="changeRouting" name="Change Routing"/>
+        <bpmn:task id="displayProductGroup" name="Display Product Group"/>
+        <bpmn:task id="createSOP" name="Create Sales and Operations Plan"/>
+        <bpmn:task id="transferSOP" name="Transfer SOP to Demand Management"/>
+        <bpmn:task id="reviewDemand" name="Review Demand Management"/>
+        <bpmn:task id="runMPS" name="Run MPS with MRP"/>
+        <bpmn:task id="reviewStock" name="Review Stock/Requirements List"/>
+        <bpmn:task id="convertOrder" name="Convert Planned Order to Production Order"/>
+        <bpmn:task id="receiveGoods" name="Receive Goods in Inventory"/>
+        <bpmn:task id="issueGoods" name="Issue Goods to Production Order"/>
+        <bpmn:task id="reviewProductionOrder" name="Review Production Order Status"/>
+        <bpmn:task id="confirmProduction" name="Confirm Production Completion"/>
+        <bpmn:task id="receiveFromProduction" name="Receive Goods from Production Order"/>
+        <bpmn:task id="reviewCosts" name="Review Costs Assigned to Production Order"/>
+        <bpmn:task id="settleCosts" name="Settle Costs of Production Order"/>
+        <bpmn:endEvent id="endEvent"/>
+
+        <!-- Sequence Flows -->
+        <bpmn:sequenceFlow sourceRef="startEvent" targetRef="changeMaterialRecord"/>
+        <bpmn:sequenceFlow sourceRef="changeMaterialRecord" targetRef="changeRouting"/>
+        <bpmn:sequenceFlow sourceRef="changeRouting" targetRef="displayProductGroup"/>
+        <bpmn:sequenceFlow sourceRef="displayProductGroup" targetRef="createSOP"/>
+        <bpmn:sequenceFlow sourceRef="createSOP" targetRef="transferSOP"/>
+        <bpmn:sequenceFlow sourceRef="transferSOP" targetRef="reviewDemand"/>
+        <bpmn:sequenceFlow sourceRef="reviewDemand" targetRef="runMPS"/>
+        <bpmn:sequenceFlow sourceRef="runMPS" targetRef="reviewStock"/>
+        <bpmn:sequenceFlow sourceRef="reviewStock" targetRef="convertOrder"/>
+        <bpmn:sequenceFlow sourceRef="convertOrder" targetRef="receiveGoods"/>
+        <bpmn:sequenceFlow sourceRef="receiveGoods" targetRef="issueGoods"/>
+        <bpmn:sequenceFlow sourceRef="issueGoods" targetRef="reviewProductionOrder"/>
+        <bpmn:sequenceFlow sourceRef="reviewProductionOrder" targetRef="confirmProduction"/>
+        <bpmn:sequenceFlow sourceRef="confirmProduction" targetRef="receiveFromProduction"/>
+        <bpmn:sequenceFlow sourceRef="receiveFromProduction" targetRef="reviewCosts"/>
+        <bpmn:sequenceFlow sourceRef="reviewCosts" targetRef="settleCosts"/>
+        <bpmn:sequenceFlow sourceRef="settleCosts" targetRef="endEvent"/>
+    </bpmn:process>
+
+    <!-- Diagram elements here (bpmndi:BPMNDiagram) -->
+
+</bpmn:definitions>
